@@ -1,0 +1,61 @@
+// Floats
+// -------------------------
+.pull-right{ float: right !important;}
+.pull-left { float: left !important;}
+
+// Centering
+// -------------------------
+.hcenter{
+  margin-left: auto;
+  margin-right: auto;
+}
+.vcenter{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.vcenter{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.vtop   { vertical-align: top; }
+.vmiddle{ vertical-align: middle; }
+.vbottom{ vertical-align: bottom; }
+
+// Positioning
+// -------------------------
+.fixed   { position: fixed; }
+.relative{ position: relative; }
+.absolute{ position: absolute; }
+// Toggling content
+// -------------------------
+
+// Note: Deprecated .hide in favor of .hidden or .sr-only (as appropriate) in v3.0.1
+.iblock   { display: inline-block; }
+.block    { display: block; }
+.hide     { display: none !important; }
+.show     { display: block !important; }
+.invisible{ visibility: hidden; }
+
+// Alignment
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+.text-center { text-align: center; }
+.text-justify{ text-align: justify; }
+.text-nowrap { white-space: nowrap; }
+
+// Transformation
+.text-lowercase { text-transform: lowercase; }
+.text-uppercase { text-transform: uppercase; }
+.text-capitalize{ text-transform: capitalize; }
+
+
+// Hide from screenreaders and browsers
+//
+// Credit: HTML5 Boilerplate
+
+.hidden {
+  display: none !important;
+}
