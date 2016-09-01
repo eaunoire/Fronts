@@ -8,7 +8,9 @@ var gulp         = require('gulp'),
     browserSync  = require('browser-sync'),
     reload       = browserSync.reload,
     imagemin     = require('gulp-imagemin'),
-    clean        = require('gulp-clean');
+    clean        = require('gulp-clean'),
+    jshint       = require('gulp-jshint')
+    stylish      = require('jshint-stylish');
 
 var config = {
       path: {
@@ -52,6 +54,18 @@ gulp.task('build:sass', ['build:clean'], function(){
     .pipe(gulp.dest(config.path.dest + '/css'));
 });
 
+//Task for scripts knowing which one is error in js
+gulp.task('jshint', function(){
+  return gulp.src(
+      [
+        config.path.src + '/js/**/*.js',
+        '!'+ config.path.src + '/js{,/**/*.min.js}',
+        '!'+ config.path.src + '/js/plugins.js'
+      ]
+    )
+    .pipe(jshint())
+    .pipe(jshint.reporter(stylish));
+});
 //Task for scripts concatenate all scripts in folder 'plugins' to plugins.js (not minified)
 gulp.task('scripts', function(){
   // return gulp.src(['./lib/file3.js', './lib/file1.js', './lib/file2.js'])
@@ -106,10 +120,10 @@ gulp.task("build:copy", ['build:clean'], function(){
 });
 
 gulp.task('watch', function(){
-  gulp.watch(config.path.src + '/*.html', ['watch']);
+  gulp.watch(config.path.src + '/*.html', ['html']);
   gulp.watch(config.path.src + '/sass/**/*.scss', ['sass']);
   gulp.watch(config.path.src + '/js/**/*.js', ['scripts']);
 });
 
 gulp.task('build', ['build:clean', 'build:copy', 'build:sass', 'build:scripts', 'build:images', 'build:server']);
-gulp.task('dev', ['sass', 'scripts', 'server', 'watch']);
+gulp.task('dev', ['sass', 'jshint', 'scripts', 'server', 'watch']);
