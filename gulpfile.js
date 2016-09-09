@@ -39,6 +39,7 @@ gulp.task('sass', function(){
     .pipe(gulp.dest(config.path.src + '/css'))
     .pipe(reload({stream: true}));
 });
+
 //Task for transpile sass to one css file(style.css) and minify the css
 gulp.task('build:sass', ['build:clean'], function(){
   return gulp.src(config.path.src + '/sass/style.scss')
@@ -66,18 +67,25 @@ gulp.task('jshint', function(){
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
+
 //Task for scripts concatenate all scripts in folder 'plugins' to plugins.js (not minified)
 gulp.task('scripts', function(){
-  // return gulp.src(['./lib/file3.js', './lib/file1.js', './lib/file2.js'])
+  //used to make sure the sources is in order
+  var source = [
+    config.path.src + '/js/plugins/modernizr-2.8.3.min.js'
+    config.path.src + '/js/plugins/file1.js',
+    config.path.src + '/js/plugins/file2.js'
+  ]
+  // return gulp.src(source)
   return gulp.src(config.path.src + '/js/plugins/*.js')
     .pipe(plumber())
     .pipe(concat('./plugins.js'))
     .pipe(gulp.dest(config.path.src + '/js/'))
     .pipe(reload({stream: true}));
 });
+
 //Task for minifying plugin scripts
 gulp.task('build:scripts', ['build:clean'], function(){
-  // return gulp.src(['./lib/file3.js', './lib/file1.js', './lib/file2.js'])
   return gulp.src(config.path.src + '/js/*.js')
     .pipe(plumber())
     .pipe(gulp.dest(config.path.dest + '/js/'));
@@ -104,18 +112,21 @@ gulp.task("build:clean", function(){
   return gulp.src(config.path.dest + '**/*', {read: false})
     .pipe(clean());
 });
+
 // Task for copy all files from folder 'app' 
 // except 'images'(handled on build task), 'js'(handled on build task), 'css'(handled on build task), 'sass' (not needed in dist)
 gulp.task("build:copy", ['build:clean'], function(){
-  return gulp.src(
-      [
-        config.path.src + '/**/*',
-        '!'+ config.path.src + '/images{,/**/*}',
-        '!'+ config.path.src + '/sass{,/**/*}',
-        '!'+ config.path.src + '/js{,/**/*}',
-        '!'+ config.path.src + '/css{,/**/*}'
-      ]
-    )
+  var exclude = [
+    '!'+ config.path.src + '/images{,/**/*}',
+    '!'+ config.path.src + '/sass{,/**/*}',
+    '!'+ config.path.src + '/js{,/**/*}',
+    '!'+ config.path.src + '/css{,/**/*}'
+  ],
+    include =  [
+    config.path.src + '/**/*'
+  ],
+    copy = include.concat(exclude);
+  return gulp.src(copy)
     .pipe(gulp.dest(config.path.dest, { base: '.' }));
 });
 
