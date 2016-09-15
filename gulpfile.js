@@ -9,8 +9,9 @@ var gulp         = require('gulp'),
     reload       = browserSync.reload,
     imagemin     = require('gulp-imagemin'),
     clean        = require('gulp-clean'),
-    jshint       = require('gulp-jshint')
-    stylish      = require('jshint-stylish');
+    jshint       = require('gulp-jshint'),
+    stylish      = require('jshint-stylish'),
+    svgSprite    = require('gulp-svg-sprite');
 
 var config = {
       path: {
@@ -19,6 +20,29 @@ var config = {
       }
     };
 
+//Config generator http://jkphl.github.io/svg-sprite/#json
+var svg_icon_config = {
+      shape: {
+        dimension: {
+          maxWidth: 24,
+          maxHeight: 24
+        },
+      },
+      mode: {
+        symbol: {
+          dest: '.',
+          sprite: "sprite.icon.svg" 
+        }
+      }
+    };
+var svg_static_config = {
+      mode: {
+        symbol: {
+          dest: '.',
+          sprite: "sprite.static.svg" 
+        }
+      }
+    };
 //Task for html
 gulp.task('html', reload);
 
@@ -37,7 +61,7 @@ gulp.task('sass', function(){
     }))
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest(config.path.src + '/css'))
-    .pipe(reload({stream: true}));
+    .pipe(browserSync.stream({match: '**/*.css'}));
 });
 
 //Task for transpile sass to one css file(style.css) and minify the css
@@ -72,7 +96,7 @@ gulp.task('jshint', function(){
 gulp.task('scripts', function(){
   //used to make sure the sources is in order
   var source = [
-    config.path.src + '/js/plugins/modernizr-2.8.3.min.js'
+    config.path.src + '/js/plugins/modernizr-2.8.3.min.js',
     config.path.src + '/js/plugins/file1.js',
     config.path.src + '/js/plugins/file2.js'
   ]
@@ -91,20 +115,57 @@ gulp.task('build:scripts', ['build:clean'], function(){
     .pipe(gulp.dest(config.path.dest + '/js/'));
 });
 
+//Task for spriting SVG for icon and for static images
+gulp.task("svgicon", function(){
+  return gulp.src(config.path.src + '/images/svg/icon/*')
+    .pipe(svgSprite(svg_icon_config))
+    .pipe(gulp.dest(config.path.src + '/images'));
+});
+gulp.task("svgstatic", function(){
+  return gulp.src(config.path.src + '/images/svg/static/*')
+    .pipe(svgSprite(svg_static_config))
+    .pipe(gulp.dest(config.path.src + '/images'));
+});
+
 //Task for compressing image assets (JPG, PNG, SVG)
 gulp.task('build:images', ['build:clean'], function(){
-  return gulp.src(config.path.src + '/images/*')
+  var exclude = [
+    '!'+ config.path.src + '/images/svg{,/**/*}'
+  ],
+  include =  [
+    config.path.src + '/images/**/*'
+  ],
+  images = include.concat(exclude);
+  return gulp.src(images)
     .pipe(plumber())
-    .pipe(imagemin())
+    .pipe(imagemin([imagemin.gifsicle(), imagemin.jpegtran(), imagemin.optipng()]))
     .pipe(gulp.dest(config.path.dest + '/images'));
 });
 
 //Servers
 gulp.task("server", function(){
-  browserSync({server: config.path.src});
+  browserSync.init({
+    server: config.path.src,
+    port: 8080,
+    ui:{
+      port: 8081,
+      weinre:{
+          port: 8082
+      }
+    }
+  });
 })
 gulp.task("build:server", function(){
-  browserSync({server: config.path.dest});
+  browserSync.init({
+    server: config.path.dest,
+    port: 8083,
+    ui:{
+      port: 8084,
+      weinre:{
+          port: 8085
+      }
+    }
+  });
 });
 
 //Task for clean all folders and files in folder 'dist'
@@ -122,18 +183,20 @@ gulp.task("build:copy", ['build:clean'], function(){
     '!'+ config.path.src + '/js{,/**/*}',
     '!'+ config.path.src + '/css{,/**/*}'
   ],
-    include =  [
+  include =  [
     config.path.src + '/**/*'
   ],
-    copy = include.concat(exclude);
+  copy = include.concat(exclude);
   return gulp.src(copy)
     .pipe(gulp.dest(config.path.dest, { base: '.' }));
 });
 
-gulp.task('watch', function(){
+gulp.task('watch', ['server'],function(){
   gulp.watch(config.path.src + '/*.html', ['html']);
   gulp.watch(config.path.src + '/sass/**/*.scss', ['sass']);
   gulp.watch(config.path.src + '/js/**/*.js', ['scripts']);
+  gulp.watch(config.path.src + '/images/svg/icon/*.svg', ['svgicon']);
+  gulp.watch(config.path.src + '/images/svg/static/*.svg', ['svgstatic']);
 });
 
 gulp.task('build', ['build:clean', 'build:copy', 'build:sass', 'build:scripts', 'build:images', 'build:server']);
