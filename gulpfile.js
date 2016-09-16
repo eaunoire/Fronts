@@ -93,7 +93,7 @@ gulp.task('jshint', function(){
 });
 
 //Task for scripts concatenate all scripts in folder 'plugins' to plugins.js (not minified)
-gulp.task('scripts', function(){
+gulp.task('scripts', ['jshint'], function(){
   //used to make sure the sources is in order
   var source = [
     config.path.src + '/js/plugins/modernizr-2.8.3.min.js',
@@ -147,9 +147,9 @@ gulp.task("server", function(){
   browserSync.init({
     server: config.path.src,
     port: 8080,
-    ui:{
+    ui: {
       port: 8081,
-      weinre:{
+      weinre: {
           port: 8082
       }
     }
@@ -159,9 +159,9 @@ gulp.task("build:server", function(){
   browserSync.init({
     server: config.path.dest,
     port: 8083,
-    ui:{
+    ui: {
       port: 8084,
-      weinre:{
+      weinre: {
           port: 8085
       }
     }
