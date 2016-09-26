@@ -47,9 +47,13 @@
 .text-nowrap { white-space: nowrap; }
 
 // Transformation
-.text-lowercase { text-transform: lowercase; }
-.text-uppercase { text-transform: uppercase; }
-.text-capitalize{ text-transform: capitalize; }
+.i         { font-style: italic; }
+.b         { font-weight: bold; }
+.underline { text-decoration: underline; }
+.strike    { text-decoration: line-through; }
+.ttc       { text-transform: capitalize; }
+.ttl       { text-transform: lowercase; }
+.ttu       { text-transform: uppercase; }
 
 
 // Hide from screenreaders and browsers
