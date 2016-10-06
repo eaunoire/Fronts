@@ -632,20 +632,41 @@ body {
   white-space: nowrap;
 }
 
-.text-lowercase {
+.i {
+  font-style: italic;
+}
+
+.b {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.ttc {
+  text-transform: capitalize;
+}
+
+.ttl {
   text-transform: lowercase;
 }
 
-.text-uppercase {
+.ttu {
   text-transform: uppercase;
-}
-
-.text-capitalize {
-  text-transform: capitalize;
 }
 
 .hidden {
   display: none !important;
+}
+
+.button {
+  border: 1px solid #0000ff;
+  background-color: #000000;
 }
 
 /*# sourceMappingURL=style.css.map */

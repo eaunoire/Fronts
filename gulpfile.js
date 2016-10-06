@@ -150,7 +150,7 @@ gulp.task("server", function(){
     ui: {
       port: 8081,
       weinre: {
-          port: 8082
+        port: 8082
       }
     }
   });
@@ -162,7 +162,7 @@ gulp.task("build:server", function(){
     ui: {
       port: 8084,
       weinre: {
-          port: 8085
+        port: 8085
       }
     }
   });

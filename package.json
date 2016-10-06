@@ -4,6 +4,8 @@
   "description": "Starter pack for front end development in Weekend Inc.",
   "main": "index.js",
   "scripts": {
+    "dev": "gulp dev",
+    "build": "gulp build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Aditya Pratama Nur",
