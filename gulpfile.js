@@ -11,6 +11,7 @@ var gulp         = require('gulp'),
     clean        = require('gulp-clean'),
     jshint       = require('gulp-jshint'),
     stylish      = require('jshint-stylish'),
+    purify       = require('purify-css'),
     svgSprite    = require('gulp-svg-sprite');
 
 var config = {
@@ -47,7 +48,7 @@ var svg_static_config = {
 gulp.task('html', reload);
 
 //Task for transpile sass to one css file(style.css) and make source map (not minified)
-gulp.task('sass', function(){
+gulp.task('css', function(){
   return gulp.src(config.path.src + '/sass/style.scss')
     .pipe(plumber())
     .pipe(sourcemaps.init())
@@ -65,12 +66,12 @@ gulp.task('sass', function(){
 });
 
 //Task for transpile sass to one css file(style.css) and minify the css
-gulp.task('build:sass', ['build:clean'], function(){
+gulp.task('build:css', ['build:clean'], function(){
   return gulp.src(config.path.src + '/sass/style.scss')
     .pipe(plumber())
     .pipe(
       sass({
-        outputStyle: 'compressed'
+        // outputStyle: 'compressed'
       })
       .on('error', sass.logError))
     .pipe(autoprefixer({
@@ -79,15 +80,30 @@ gulp.task('build:sass', ['build:clean'], function(){
     .pipe(gulp.dest(config.path.dest + '/css'));
 });
 
+//This task will remove unused css
+gulp.task('build:purify', ['build:css','build:scripts', 'build:copy'], function(){
+  var include = [
+    config.path.src + '/*.html', 
+    config.path.src + '/js/*.js'
+  ],
+  css = [config.path.dest + '/css/style.css'];
+  var options = {
+    output: config.path.dest + '/css/style.css',
+    minify: true,
+    info: true
+  };
+  purify(include, css, options);
+});
+
 //Task for scripts knowing which one is error in js
 gulp.task('jshint', function(){
-  return gulp.src(
-      [
-        config.path.src + '/js/**/*.js',
-        '!'+ config.path.src + '/js{,/**/*.min.js}',
-        '!'+ config.path.src + '/js/plugins.js'
-      ]
-    )
+  var exclude = [
+    '!'+ config.path.src + '/js{,/**/*.min.js}',
+    '!'+ config.path.src + '/js/plugins.js'
+  ],
+  include = config.path.src + '/js/**/*.js',
+  jssrc = include.concat(exclude);
+  return gulp.src(jssrc)
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
@@ -96,12 +112,10 @@ gulp.task('jshint', function(){
 gulp.task('scripts', ['jshint'], function(){
   //used to make sure the sources is in order
   var source = [
-    config.path.src + '/js/plugins/modernizr-2.8.3.min.js',
-    config.path.src + '/js/plugins/file1.js',
-    config.path.src + '/js/plugins/file2.js'
+    config.path.src + '/js/plugins/fastclick.js'
   ]
-  // return gulp.src(source)
-  return gulp.src(config.path.src + '/js/plugins/*.js')
+  // return gulp.src(config.path.src + '/js/plugins/*.js')
+  return gulp.src(source)
     .pipe(plumber())
     .pipe(concat('./plugins.js'))
     .pipe(gulp.dest(config.path.src + '/js/'))
@@ -199,5 +213,8 @@ gulp.task('watch', ['server'],function(){
   gulp.watch(config.path.src + '/images/svg/static/*.svg', ['svgstatic']);
 });
 
-gulp.task('build', ['build:clean', 'build:copy', 'build:sass', 'build:scripts', 'build:images', 'build:server']);
-gulp.task('dev', ['sass', 'jshint', 'scripts', 'server', 'watch']);
+//Gulp task, called from npm, if build:purify caused some class to missing, use the next one
+gulp.task('build', ['build:clean', 'build:copy', 'build:scripts', 'build:images', 'build:purify', 'build:server']);
+// gulp.task('build', ['build:clean', 'build:copy', 'build:scripts', 'build:images', 'build:css', 'build:server']);
+
+gulp.task('dev', ['css', 'jshint', 'scripts', 'server', 'watch']);

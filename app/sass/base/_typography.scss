@@ -1,7 +1,32 @@
 /**
  * Basic typography style for copy text
  */
-body {
+body{
   color: $text-color;
   font: normal 125% / 1.4 $text-font-stack;
+}
+
+/**
+ * Make different classes, specially to change font
+ */
+
+// .font-1{
+//   font: normal 125% / 1.4 $text-font-stack;
+// }
+
+// .font-2{
+//   font: normal 125% / 1.4 $text-font-stack;
+// }
+
+.loaded{
+  body{
+    font: normal 125% / 1.4 $text-font-stack-loaded;
+  }
+
+  // .font-1{
+  //   font: normal 125% / 1.4 $text-font-stack-loaded;
+  // }
+  // .font-2{
+  //   font: normal 125% / 1.4 $text-font-stack-loaded;
+  // }
 }
