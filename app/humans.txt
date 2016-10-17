@@ -3,13 +3,13 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Aditya Pratama Nur -- Front End Developer
 
 # THANKS
 
-    <name>
+    Weekend Inc.
 
 # TECHNOLOGY COLOPHON
 
-    HTML5, CSS3, SASS,
+    HTML5, CSS3, SASS, 
     jQuery, Modernizr, 

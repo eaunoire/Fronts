@@ -80,21 +80,6 @@ gulp.task('build:css', ['build:clean'], function(){
     .pipe(gulp.dest(config.path.dest + '/css'));
 });
 
-//This task will remove unused css
-gulp.task('build:purify', ['build:css','build:scripts', 'build:copy'], function(){
-  var include = [
-    config.path.src + '/*.html', 
-    config.path.src + '/js/*.js'
-  ],
-  css = [config.path.dest + '/css/style.css'];
-  var options = {
-    output: config.path.dest + '/css/style.css',
-    minify: true,
-    info: true
-  };
-  purify(include, css, options);
-});
-
 //Task for scripts knowing which one is error in js
 gulp.task('jshint', function(){
   var exclude = [
@@ -126,6 +111,7 @@ gulp.task('scripts', ['jshint'], function(){
 gulp.task('build:scripts', ['build:clean'], function(){
   return gulp.src(config.path.src + '/js/*.js')
     .pipe(plumber())
+    .pipe(uglify())
     .pipe(gulp.dest(config.path.dest + '/js/'));
 });
 
@@ -197,7 +183,7 @@ gulp.task("build:copy", ['build:clean'], function(){
     '!'+ config.path.src + '/js{,/**/*}',
     '!'+ config.path.src + '/css{,/**/*}'
   ],
-  include =  [
+  include = [
     config.path.src + '/**/*'
   ],
   copy = include.concat(exclude);
@@ -205,16 +191,31 @@ gulp.task("build:copy", ['build:clean'], function(){
     .pipe(gulp.dest(config.path.dest, { base: '.' }));
 });
 
+//This task will remove unused css after run build:css, build:scripts, build:copy
+gulp.task('build:purify', ['build:css','build:scripts', 'build:copy'], function(){
+  var include = [
+    config.path.src + '/*.html', 
+    config.path.src + '/js/*.js'
+  ],
+  css = [config.path.dest + '/css/style.css'];
+  var options = {
+    output: config.path.dest + '/css/style.css',
+    minify: true,
+    info: true
+  };
+  purify(include, css, options);
+});
+
 gulp.task('watch', ['server'],function(){
   gulp.watch(config.path.src + '/*.html', ['html']);
-  gulp.watch(config.path.src + '/sass/**/*.scss', ['sass']);
+  gulp.watch(config.path.src + '/sass/**/*.scss', ['css']);
   gulp.watch(config.path.src + '/js/**/*.js', ['scripts']);
   gulp.watch(config.path.src + '/images/svg/icon/*.svg', ['svgicon']);
   gulp.watch(config.path.src + '/images/svg/static/*.svg', ['svgstatic']);
 });
 
 //Gulp task, called from npm, if build:purify caused some class to missing, use the next one
-gulp.task('build', ['build:clean', 'build:copy', 'build:scripts', 'build:images', 'build:purify', 'build:server']);
+gulp.task('build', ['build:clean', 'build:images', 'build:purify', 'build:server']);
 // gulp.task('build', ['build:clean', 'build:copy', 'build:scripts', 'build:images', 'build:css', 'build:server']);
 
 gulp.task('dev', ['css', 'jshint', 'scripts', 'server', 'watch']);
