@@ -18,6 +18,15 @@ $text-font-stack: 'Helvetica Neue Light', 'Helvetica Neue', 'Helvetica', 'Arial'
 $code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
 
 
+//// In use font
+//// @type list
+$font-title: 'Abril Fatface', 'Comic Sans MS', cursive, sans-serif;
+$font-block: 'Montserrat', 'Arial', Helvetica, sans-serif;
+$font-monospace: 'Cutive Mono', 'Courier New', Courier, monospace;
+$font-paragraph: 'Playfair Display', 'Times New Roman', Times, serif;
+
+
+
 
 
 
@@ -42,7 +51,31 @@ $mid-grey: rgb(153, 153, 153) !default;
 $dark-grey: rgb(68, 68, 68) !default;
 
 
+//// In Used Colors
 
+/// White
+/// @type Color
+$white: rgb(255, 255, 255) !default;
+
+//// Dark Purple
+//// @type Color
+$dark-purple: #23223F;
+
+//// Green
+//// @type color
+$mute-green: #BDD6D3;
+
+//// Yellow
+//// @type color
+$bright-yellow: #FFC24C;
+
+//// Coral
+//// @type color
+$coral: #FF9191;
+
+//// Navy
+//// @type color
+$navy: #332EA6;
 
 
 /// Container's maximum width

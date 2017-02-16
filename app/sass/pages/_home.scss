@@ -1,3 +1,88 @@
 // -----------------------------------------------------------------------------
 // This file contains styles that are specific to the home page.
 // -----------------------------------------------------------------------------
+section#home {
+	position: relative;
+	background-color: $dark-purple;
+	overflow: hidden;
+}
+
+.main-title {
+	position: absolute;
+	top: 50%;
+	left: 30%;
+	-webkit-transform: translateX(-30%) translateY(-50%);
+	-moz-transform: translateX(-30%) translateY(-50%);
+	transform: translateX(-30%) translateY(-50%);
+	max-width: 550px;
+
+	@media (max-width: 768px) {
+		left: 50%;
+		-webkit-transform: translateX(-50%) translateY(-50%);
+		-moz-transform: translateX(-50%) translateY(-50%);
+		transform: translateX(-50%) translateY(-50%);
+	}
+
+	@media (max-width: 520px) {
+		max-width: 400px;
+	}
+}
+
+.main-title > h1 {
+	color: $white;
+
+	@media (max-width: 520px) {
+		-webkit-hyphens: auto;
+		-moz-hyphens: auto;
+		hyphens: auto;
+	}
+}
+
+.main-loop {
+	position: absolute;
+	top: 43%;
+	left: 45%;
+	-webkit-transform: translateY(-40%);
+	-moz-transform: translateY(-40%);
+	transform: translateY(-40%);
+
+	@media (max-width: 1200px) {
+		top: 50%;
+	}
+
+	@media (max-width: 768px) {
+		top: 52%;
+	}
+
+	@media (max-width: 520px) {
+		top: auto;
+		bottom: 25%;
+		-webkit-transform: translateY(0);
+		-moz-transform: translateY(0);
+		transform: translateY(0);
+	}
+
+	@media (max-width: 400px) {
+		left: 40%;
+	}
+}
+
+.main-loop > #main-svg {
+	width: 1500px;
+
+	@media (max-width: 1200px) {
+		width: 1000px;
+	}
+
+	@media (max-width: 768px) {
+		width: 700px;
+	}
+
+	@media (max-width: 520px) {
+		width: 500px;
+	}
+
+	@media (max-width: 400px) {
+		width: 450px;
+	}
+}

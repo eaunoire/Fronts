@@ -20,44 +20,173 @@
     <link rel="icon" sizes="16x16 24x24 32x32 48x48 64x64" href="images/favicon/favicon.ico">
     <link rel="mask-icon" href="images/favicon/favicon.svg" color="#colorHere"> <!-- put hex color here -->
 
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Oswald:300,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/aos.css" />
     <link rel="stylesheet" href="css/style.css">
 
     <script src="js/modernizr-2.8.3.min.js"></script>
-    <script src="js/fontfaceobserver.min.js"></script>
-    <!-- https://github.com/bramstein/fontfaceobserver -->
-    <script>
-      //This is a demo how to use font face observer to make font load faster and using FOUT
-      var fontOpen = new FontFaceObserver('Open Sans');
-      var fontOswald = new FontFaceObserver('Oswald');
-
-      var html = document.documentElement;
-
-      html.classList.add('fonts-loading');
-
-      Promise.all([fontOpen.load(), fontOswald.load()]).then(function(){
-        html.classList.remove('fonts-loading');
-        html.classList.add('fonts-loaded');
-      }).catch(function () {
-        html.classList.remove('fonts-loading');
-        html.classList.add('fonts-failed');
-      });
-    </script>
+    
   </head>
   <body>
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    
+    <header id="header">
+      <div class="wrapper">
+        <nav class="clearfix">
+          <ul class="main-nav">
+            <li>
+              <a href="#me">About</a>
+            </li>
+            <li>
+              <a href="#works">Works</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ul>
 
-    <p>Hello world! This is HTML5 Boilerplate</p>
-    <div class="hello">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima accusamus repudiandae cumque iusto laudantium, animi itaque ullam error ipsam ex delectus architecto necessitatibus nostrum rem saepe nulla quod amet iure.
+          <div class="mobile-btn" >
+            <a href="#" id="mbl-btn">
+              <i class="fa fa-bars" id="toggle-btn"></i>
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="mobile-menu">
+      <ul class="mobile-nav">
+          <li>
+            <a href="#me" class="mbl-link">About</a>
+          </li>
+          <li>
+            <a href="#works" class="mbl-link">Works</a>
+          </li>
+          <li>
+            <a href="#contact" class="mbl-link">Contact</a>
+          </li>
+        </ul>
     </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    <section id="home">
+      <div class="wrapper">
+        <div class="main-title">
+          <h1>Margareta Grace</h1>
+        </div>
+        <div class="main-loop">
+          <svg id="main-svg" width="100%" height="100%" viewBox="0 0 620 120" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+        <div class="main-star">
+          <svg id="main-star" width="300px" height="300px" viewBox="0 0 620 120" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </div>
+    </section>
+
+    <section id="me">
+      <div class="wrapper clearfix">
+        <div class="left-container pull-left">
+          <div class="me-content">
+            <label class="me-name">margareta</label>
+            <label class="me-job">front end</label>
+          </div>
+          <div class="me-description desc-left">
+            <p>Ex Quality Assurance. Full time Front End Developer. Part time gamer. Love designs. Terrible designer.</p>
+          </div>
+        </div>
+
+        <div class="right-container pull-right">
+          <div class="me-content">
+            <label class="me-job job-right">developer</label>
+            <label class="me-name">grace</label>
+          </div>
+          <div class="me-description desc-right">
+            <p>HTML, CSS, SASS, Javascript, Jquery, React</p>
+          </div>
+        </div>
+
+        <div class="mobile-content">
+          <div class="me-content">
+            <label class="me-name">margareta</label>
+            <label class="me-name">grace</label>
+            <label class="me-job">front end</label>
+            <label class="me-job job-right">developer</label>
+          </div>
+           <div class="me-description mobile-desc">
+            <p>Ex Quality Assurance. Full time Front End Developer. Part time gamer. Love designs. Terrible designer.</p>
+            <p>HTML, CSS, SASS, Javascript, Jquery, React</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="works">
+      <div class="wrapper clearfix">
+        <div class="work-wrapper work-1" data-aos="fade-right">
+          <span class="work-desc-background"></span>
+          <img src="/images/Soundrenaline.png" class="work-img" />
+          <div class="work-desc">
+            <label class="work-title">Soundrenaline 2016</label>
+            <p>Website for Soundrenaline, yearly music festival event held in Indonesia.</p>
+          </div>
+        </div>
+
+        <div class="work-wrapper work-2" data-aos="fade-left">
+          <span class="work-desc-background"></span>
+          <img src="/images/Flower_Advisor.png" class="work-img" />
+          <div class="work-desc">
+            <label class="work-title">Flower Advisor</label>
+            <p>Website for Flower Advisor, International Flower Delivery online shop.</p>
+          </div>
+        </div>
+
+        <div class="work-wrapper work-3" data-aos="fade-up">
+          <span class="work-desc-background"></span>
+          <img src="/images/Tada.png" class="work-img" />
+          <div class="work-desc">
+            <label class="work-title">TADA</label>
+            <p>Website for TADA.id, all-in-one gift card online shop.</p>
+          </div>
+        </div>
+
+        <div class="work-wrapper work-4" data-aos="fade-down">
+          <span class="work-desc-background"></span>
+          <img src="/images/Harmony.png" class="work-img" />
+          <div class="work-desc">
+            <label class="work-title">Harmony</label>
+            <p>Website for Harmony, Online accounting software. WIP.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrapper">
+        <div class="card-wrapper">
+          <div class="card card-front" data-aos="flip-left">
+              <label class="name-main"></label>
+          </div>
+          <div class="card card-back" data-aos="flip-right">
+              <label class="name-card">Margareta Grace</label>
+              <label class="position-card">Front End Developer</label>
+              <div class="social-media">
+                
+              </div>
+              <label class="email-card">grace@weekendinc.com</label>
+          </div>
+
+          <div class="contact-me">
+            <label class="contact">Drop by and Say Hi!</label>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <script src="js/plugins.js"></script>
+    <script src="js/snap.svg-min.js"></script>
+    <script src="js/aos.js"></script>
     <script src="js/main.js"></script>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

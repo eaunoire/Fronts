@@ -1,3 +1,131 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	padding: 16px 0;
+	z-index: 10;
+}
+
+.header-onScroll {
+	background-color: $dark-purple;
+	transition: 0.3s all;
+}
+
+header > .wrapper {
+	padding-bottom: 0;
+}
+
+.main-nav {
+	display: block;
+	margin: 0 auto;
+	text-align: center;
+	padding: 0;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.mobile-btn {
+	position: relative;
+	float: right;
+	display: none;
+	z-index: 10;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
+
+.mobile-btn > a {
+	padding: 16px;
+	color: $bright-yellow;
+
+	&:hover {
+		color: $coral;
+	}
+
+	&:focus {
+		outline: none;
+		text-decoration: none;
+	}
+}
+
+.main-nav > li, .mobile-nav > li {
+	display: inline-block;
+	text-align: center;
+	margin: 0 auto;
+	text-transform: uppercase;
+	font: 400 14px $font-monospace;
+	padding: 0;
+}
+
+.main-nav > li > a {
+	line-height: 48px;
+	display: block;
+	margin: 0;
+	color: $white;
+	padding: 0 32px;
+
+	&:hover {
+		text-decoration: none;
+		color: $bright-yellow;
+	}
+
+	&:focus {
+		outline: none;
+		text-decoration: none;
+	}
+}
+
+/*MOBILE*/
+.mobile-menu {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: $dark-purple;
+	z-index: 9;
+}
+
+.menu-active {
+	display: block;
+}
+
+.mobile-nav {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	padding: 0;
+	-webkit-transform: translateX(-50%) translateY(-50%);
+	-moz-transform: translateX(-50%) translateY(-50%);
+	transform: translateX(-50%) translateY(-50%);
+}
+
+.mobile-nav > li {
+	display: block;
+}
+
+.mobile-nav > li > a {
+	display: block;
+	color: $white;
+	margin: 0;
+	padding: 16px;
+
+	&:hover {
+		text-decoration: none;
+		color: $bright-yellow;
+	}
+
+	&:focus {
+		outline: none;
+		text-decoration: none;
+	}
+}

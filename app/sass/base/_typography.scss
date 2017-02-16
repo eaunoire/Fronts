@@ -3,30 +3,27 @@
  */
 body{
   color: $text-color;
-  font: normal 125% / 1.4 $text-font-stack;
+  font: normal 125% / 1.4 $font-block;
 }
 
 /**
  * Make different classes, specially to change font
  */
 
-// .font-1{
-//   font: normal 125% / 1.4 $text-font-stack;
-// }
-
-// .font-2{
-//   font: normal 125% / 1.4 $text-font-stack;
-// }
-
 .loaded{
   body{
-    font: normal 125% / 1.4 $text-font-stack-loaded;
+    font: normal 125% / 1.4 $font-block;
   }
+}
 
-  // .font-1{
-  //   font: normal 125% / 1.4 $text-font-stack-loaded;
-  // }
-  // .font-2{
-  //   font: normal 125% / 1.4 $text-font-stack-loaded;
-  // }
+h1 {
+	font: 400 7rem $font-title;
+
+	@media (max-width: 768px) {
+		font-size: 5rem;
+	}
+
+	@media (max-width: 400px) {
+		font-size: 4rem;
+	}
 }

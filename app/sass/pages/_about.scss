@@ -1,0 +1,116 @@
+section#me {
+	position: relative;
+	background-color: #BDD6D3;
+}
+
+.left-container, .right-container {
+	position: relative;
+	top: 100px;
+	width: 50%;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.me-content {
+	padding: 80px 32px;
+	width: 400px;
+
+	@media (max-width: 768px) {
+		margin: 0 auto;
+	}
+
+	@media (max-width: 400px) {
+		width: 100%;
+		padding: 32px;
+	}
+}
+
+.me-name {
+	display: block;
+	font: 400 7rem $font-title;
+	line-height: 1;
+	color: $white;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+	margin: 0;
+
+	@media (max-width: 830px) {
+		font-size: 5rem;
+	}
+
+	@media (max-width: 400px) {
+		font-size: 4rem;
+	}
+}
+
+.me-job {
+	display: block;
+	font: 400 7rem $font-title;
+	line-height: 1;
+	color: $coral;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	hyphens: auto;
+	margin: 0;
+
+	@media (max-width: 830px) {
+		font-size: 5rem;
+	}
+
+	@media (max-width: 400px) {
+		font-size: 4rem;
+	}
+}
+
+.job-right {
+	color: lighten($bright-yellow, 10%);
+}
+
+.me-description {
+	position: absolute;
+	width: 150px;
+}
+
+.me-description > p {
+	font: 400 0.75rem $font-paragraph;
+	line-height: 1.5;
+
+	@media (max-width: 320px) {
+		font-size: 0.5rem;
+	}
+}
+
+.desc-left {
+	top: 10%;
+	right: 10%;
+}
+
+.desc-right {
+	bottom: 0;
+	right: 20%;
+}
+
+.mobile-desc {
+	bottom: 5%;
+	right: 10%;
+
+	@media (max-width: 320px) {
+		bottom: 20%;
+		right: 0;
+	}
+}
+
+
+/*MOBILE*/
+.mobile-content {
+	display: none;
+	top: 50px;
+	width: 100%;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
